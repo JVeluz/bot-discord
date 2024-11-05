@@ -3,7 +3,7 @@
   "version": "1.0.0",
   "scripts": {
     "clear": "rmdir /s /q build",
-    "build": "npm run clear && tsc",
+    "build": "tsc",
     "start": "node build/index.js",
     "dev": "nodemon build/index.js"
   },
