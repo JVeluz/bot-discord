@@ -5,7 +5,7 @@ const channel_to_filter = [
         "1301974289016295577"
 ]
 
-module.exports = {
+export = {
         name: Events.MessageCreate,
         async execute(message: Message) {
                 if (message.author.bot) return;
@@ -15,5 +15,3 @@ module.exports = {
                 }
         },
 };
-
-export {}

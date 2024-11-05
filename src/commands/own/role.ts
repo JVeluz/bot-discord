@@ -1,6 +1,6 @@
 import { ChatInputCommandInteraction, SlashCommandBuilder } from "discord.js";
 
-module.exports = {
+export = {
     data: new SlashCommandBuilder()
         .setName("role")
         .setDescription("Ajouter des rôles"),

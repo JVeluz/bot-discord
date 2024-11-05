@@ -1,15 +1,19 @@
-const fs = require('node:fs');
-const path = require('node:path');
-const { Client, Collection, GatewayIntentBits } = require('discord.js');
-const { token } = require('../config.json');
+import fs from 'node:fs';
+import path from 'node:path';
+import { Client, Collection, GatewayIntentBits } from 'discord.js';
+import { token } from '../config.json';
 
-const client = new Client({ intents: [
+interface ExtendedClient extends Client {
+	commands: Collection<string, any>;
+}
+
+const client: ExtendedClient = new Client({ intents: [
 	GatewayIntentBits.Guilds,
 	GatewayIntentBits.GuildMessages,
 	GatewayIntentBits.GuildMessagePolls,
 	GatewayIntentBits.MessageContent,
 	GatewayIntentBits.GuildVoiceStates
-]});
+]}) as ExtendedClient;
 
 client.commands = new Collection();
 const foldersPath = path.join(__dirname, 'commands');

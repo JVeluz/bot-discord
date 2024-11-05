@@ -2,9 +2,10 @@
   "name": "game-bot",
   "version": "1.0.0",
   "scripts": {
-    "build": "tsc",
-    "dev": "npm run build && nodemon build/index.js",
-    "start": "node"
+    "clear": "rmdir /s /q build",
+    "build": "npm run clear && tsc",
+    "start": "node build/index.js",
+    "dev": "nodemon build/index.js"
   },
   "author": "",
   "license": "ISC",

@@ -1,24 +1,19 @@
 import { Events, VoiceState } from "discord.js";
+import { to_clone_channels } from "../../config.json";
 
-const channels_to_clone_ids = [
-    // "1300934053792317450",
-    // "1300934098440949770",
-    "1301554118107729960"
-];
-
-module.exports = {
+export = {
 	name: Events.VoiceStateUpdate,
 	async execute(oldState: VoiceState, newState: VoiceState) {
         let vocals = null;
         let main_channel = null;
         if (newState.channel) {
             vocals = newState.channel.parent?.children.cache.filter(s => s.isVoiceBased());
-            main_channel = vocals?.find(s => channels_to_clone_ids.includes(s.id));
+            main_channel = vocals?.find(s => to_clone_channels.includes(s.id));
         }
         if (!main_channel) {
             if (oldState.channel) {
                 vocals = oldState.channel.parent?.children.cache.filter(s => s.isVoiceBased());
-                main_channel = vocals?.find(s => channels_to_clone_ids.includes(s.id));
+                main_channel = vocals?.find(s => to_clone_channels.includes(s.id));
             }
         }
         if (!vocals) return;
@@ -46,7 +41,7 @@ module.exports = {
                         is_one_empty = true;
                         return;
                     }
-                    if (channels_to_clone_ids.includes(s.id)) return;
+                    if (to_clone_channels.includes(s.id)) return;
                     await s.delete();
                 }
             });
