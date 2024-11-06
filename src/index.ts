@@ -8,14 +8,6 @@ interface ExtendedClient extends Client {
 	commands: Collection<string, any>;
 }
 
-const app = express()
-app.get('/', (req: any, res: any) => {
-	res.send('Hello World!')
-})
-app.listen(port, () => {
-	console.log(`Listening on port ${port}`)
-})
-
 const client: ExtendedClient = new Client({ intents: [
 	GatewayIntentBits.Guilds,
 	GatewayIntentBits.GuildMessages,
@@ -56,3 +48,11 @@ for (const file of eventFiles) {
 }
 
 client.login(token);
+
+const app = express()
+app.get('/', (req: any, res: any) => {
+	res.send('Hello World!')
+})
+app.listen(port, () => {
+	console.log(`Listening on port ${port}`)
+})
