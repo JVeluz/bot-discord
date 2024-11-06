@@ -1,12 +1,20 @@
 import fs from 'node:fs';
 import path from 'node:path';
 import { Client, Collection, GatewayIntentBits } from 'discord.js';
-import { token } from '../config.json';
-
+import { token, port } from '../config.json';
+import express from 'express';
 
 interface ExtendedClient extends Client {
 	commands: Collection<string, any>;
 }
+
+const app = express()
+app.get('/', (req: any, res: any) => {
+	res.send('Hello World!')
+})
+app.listen(port, () => {
+	console.log(`Listening on port ${port}`)
+})
 
 const client: ExtendedClient = new Client({ intents: [
 	GatewayIntentBits.Guilds,
@@ -48,15 +56,3 @@ for (const file of eventFiles) {
 }
 
 client.login(token);
-
-const express = require("express");
-const app = express()
-const port = 4023;
-
-app.get('/', (req: any, res: any) => {
-  res.send('Hello World!')
-})
-
-app.listen(port, () => {
-  console.log(`Listening on port ${port}`)
-})
