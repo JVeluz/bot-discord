@@ -1,8 +1,7 @@
 import fs from 'node:fs';
 import path from 'node:path';
 import { Client, Collection, GatewayIntentBits } from 'discord.js';
-import { token, port } from '../config.json';
-import express from 'express';
+import { token } from '../config.json';
 
 interface ExtendedClient extends Client {
 	commands: Collection<string, any>;
@@ -48,11 +47,3 @@ for (const file of eventFiles) {
 }
 
 client.login(token);
-
-const app = express()
-app.get('/', (req: any, res: any) => {
-	res.send('Hello World!')
-})
-app.listen(port, () => {
-	console.log(`Listening on port ${port}`)
-})

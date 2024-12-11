@@ -9,11 +9,12 @@ export = {
         async execute(message: Message) {
                 if (!to_text_filter_channels.includes(message.channelId)) return;
                 if (message.author.bot) return;
+                if (message.mentions.repliedUser) return;
                 if (message.content.match(allowed_links)) return;
                 if (message.attachments.size !== 0) return;
-
-                const reply = await message.reply({ content: "Seul les images et liens sont autorisés" });
-                await setTimeout(5000);
+                
+                const reply = await message.reply({ content: "Répondre au message ou créer un fil pour parler ici" });
+                await setTimeout(4000);
                 await message.delete();
                 await reply.delete();
         },
